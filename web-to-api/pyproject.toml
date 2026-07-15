@@ -1,0 +1,56 @@
+[project]
+name = "web-to-api"
+version = "0.1.0"
+description = "Co-design a cached API mapping from a public website"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "crawl4ai>=0.7",
+  "diskcache>=5.6",
+  "extruct>=0.18",
+  "fastapi>=0.116",
+  "feedparser>=6.0",
+  "httpx>=0.28",
+  "jsonpath-ng>=1.7",
+  "logfire[fastapi]>=4.0",
+  "openapi-spec-validator>=0.7",
+  "protego>=0.4",
+  "pydantic-ai-slim[logfire,openai,web]>=1.0",
+  "pydantic-settings>=2.10",
+  "pyyaml>=6.0",
+  "selectolax>=0.3",
+  "uvicorn[standard]>=0.35",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4",
+  "pytest-asyncio>=1.1",
+  "respx>=0.22",
+  "ruff>=0.12",
+]
+
+[project.scripts]
+web-to-api = "web_to_api.app:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/web_to_api"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.ruff.format]
+quote-style = "double"
